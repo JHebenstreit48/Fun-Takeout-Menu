@@ -67,12 +67,15 @@ def place_order(menu):
 
             # Use a list comprehension to create a list called prices_list,
             # which contains the total prices for each item in the order list:
-            # The total price for each item should multiply the price by quantity
+            # The total price for each item should multiply
+            # the price by quantity
             
-            price_list = []
-            
+            prices_list = []
+                        
+            receipt
             for total_price in order:
-                price_list.append(total_price["Price"] * total_price["Quantity"])
+                prices_list.append(total_price["Price"]
+                                   * total_price["Quantity"])
 
             # Create an order_total from the prices list using sum()
             # and round the prices to 2 decimal places.
