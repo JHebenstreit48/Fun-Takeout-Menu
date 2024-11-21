@@ -25,23 +25,18 @@ def place_order(menu):
     menu_items = get_menu_items_dict(menu)
 
     # Launch the store and present a greeting to the customer
-    print("Welcome to the House of Taste Take Out Restaurant.")
+    print("Welcome to the Generic Take Out Restaurant.")
 
     place_order = True
 
-    while True:
-        place_order = input("Would you like to order something else? (Y)es or (N)o: ")
-        if place_order == "N":
-            break
-        print("What would you like to order?")
+    while place_order:
+        print("What would you like to order? ")
         # For ordering multiple items, create a continuous loop
         
         index = 1
         
         for food_category, options in menu.items():
             for meal, price in options.items():
-                print(menu_items, food_category, meal, price)
-                
                 print_menu_line(index, food_category, meal, price)
                 index += 1
                 
@@ -77,11 +72,11 @@ def place_order(menu):
             # Create an order_total from the prices list using sum()
             # and round the prices to 2 decimal places.
             
-            order_total = sum(round(price, 2))
+            order_total = round(sum(price_list, 2))
 
         # Write a break statement or set the condition to False to exit
         # the ordering loop
-        place_order = False
+            place_order = False
 
     # Return the order list and the order total
     return order, order_total
@@ -105,29 +100,30 @@ def update_order(order, menu_selection, menu_items):
     # TODO: Check if the customer's input string can be converted 
     # to an integer and prints an error message if it does not
     
-    input = int(menu_selection)
-    
-    if input != int:
-        print("Invalid input. Please try again.")
-    
-        # TODO: Convert the menu selection to an integer
+    if menu_selection.isdigit():
+
+            # TODO: Convert the menu selection to an integer
         menu_selection = int(menu_selection)
 
         # TODO: Write a conditional statement that checks if the customer's input is 
         # an item on the menu and prints an error message if it is not
         # Store the item name as a variable
         
-        if menu_selection in menu_items:    
+        if menu_selection in menu_items.keys():    
             item_name = menu_items[menu_selection]["Item name"]
+            quantity = input(f"What quantity of {item_name} would you like? \n" + "(This will default to 1 if number is not entered)\n")
+            if quantity.isdigit():
+                quantity = int(quantity)
+            else:
+                quantity = 1
+            order.append({"Item name": item_name, "Price": menu_items[menu_selection]["Price"], "Quantity": quantity})
+        
         else:
-            print("Menu item not found. Please try again.")    
+            print("Sorry, that number isn't an option.")  
 
             # TODO: A prompt (input) to the customer that prints the name of
             # the menu item to the user and asks the quantity they would like
             # to order. Store the return in a quantity variable
-            
-    input(f"How many `${item_name}` would you like to order? ") 
-            
 
             # TODO: Write a conditional statement that checks if the input quantity 
             # can be converted to an integer, then converts it to an integer. 
@@ -137,10 +133,11 @@ def update_order(order, menu_selection, menu_items):
             # TODO: Add a dictionary with the item name, price, and quantity to the 
             # order list. Use the following names for the dictionary keys:
             # "Item name", "Price", "Quantity"
-            
+    else:
+        print(f"{menu_selection} was not a menu option.")  
 
     # TODO: Return the updated order
-    return update_order
+    return order
 
 
 def print_itemized_receipt(receipt):
@@ -161,6 +158,7 @@ def print_itemized_receipt(receipt):
 
         # TODO: Print the receipt line using the print_receipt_line function
         # send the item name, price, and quantity as separate arguments
+        # print_receipt_line()
         
 
 ##################################################
