@@ -33,6 +33,9 @@ def place_order(menu):
         print("What would you like to order? ")
         # For ordering multiple items, create a continuous loop
         
+        # Print the menu heading
+        print_menu_heading()
+        
         index = 1
         
         for food_category, options in menu.items():
@@ -67,12 +70,12 @@ def place_order(menu):
             price_list = []
             
             for total_price in order:
-                price_list.append(total_price["Price"] * total_price["Quantity"])
+                price_list = [item["Price"] * item["Quantity"]for item in order]
 
             # Create an order_total from the prices list using sum()
             # and round the prices to 2 decimal places.
             
-            order_total = round(sum(price_list, 2))
+            order_total = round(sum(price_list), 2)
 
         # Write a break statement or set the condition to False to exit
         # the ordering loop
@@ -152,13 +155,20 @@ def print_itemized_receipt(receipt):
     #print(receipt)
 
     # TODO: Loop through the items in the customer's receipt
+    # for loop
+
+    for item in receipt:
+        item_name = item["Item name"]
+        price = item["Price"]
+        quantity = item["Quantity"]
+
     
         # TODO: Store the dictionary items ("Item name", "Price", "Quantity") as variables
         
 
         # TODO: Print the receipt line using the print_receipt_line function
         # send the item name, price, and quantity as separate arguments
-        # print_receipt_line()
+        print_receipt_line(item_name, price, quantity)
         
 
 ##################################################
